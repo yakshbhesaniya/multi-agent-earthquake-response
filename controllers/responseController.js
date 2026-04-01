@@ -49,7 +49,7 @@ const responseController = {
                 final_response_summary: {
                     risk: result.coordinatorDecision.priority || "High",
                     priority_zone: (result.infrastructureAgentDetails.critical_zones || [])[0] || "South Mumbai",
-                    primary_action: "Structural inspection + route clearance (due to high collapse risk and blocked major routes)"
+                    primary_action: result.coordinatorDecision.summary_action || "Structural inspection + route clearance"
                 }
             };
 
@@ -84,7 +84,7 @@ ${formatAgent("Coordinator Decision", result.coordinatorDecision)}
 === FINAL RESPONSE SUMMARY ===
 Risk: ${result.coordinatorDecision.priority || "High"}
 Priority Zone: ${(result.infrastructureAgentDetails.critical_zones || [])[0] || "South Mumbai"}
-Primary Action: Structural inspection + route clearance (due to high collapse risk and blocked major routes)
+Primary Action: ${result.coordinatorDecision.summary_action || "Structural inspection + route clearance"}
 `.trim();
 
             console.log(`\n${terminalOutput}\n`);

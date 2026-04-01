@@ -85,7 +85,7 @@ ${formatAgent("Coordinator Decision", result.coordinatorDecision)}
 === FINAL RESPONSE SUMMARY ===
 Risk: ${result.coordinatorDecision.priority || "High"}
 Priority Zone: ${(result.infrastructureAgentDetails.critical_zones || [])[0] || "South Mumbai"}
-Primary Action: Structural inspection + route clearance (due to high collapse risk and blocked major routes)
+Primary Action: ${result.coordinatorDecision.summary_action || "Structural inspection + route clearance"}
 `.trim();
 
         console.log(`\n${terminalOutput}\n`);

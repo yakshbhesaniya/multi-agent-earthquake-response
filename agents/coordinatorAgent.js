@@ -50,7 +50,8 @@ Respond strictly with a valid JSON document containing these exact keys:
   "priority": "Low/Medium/High/Critical",
   "confidence": "Percentage (e.g., 90%)",
   "recommended_actions": ["Action1", "Action2"],
-  "final_decision": "A 1-2 sentence final tactical decision."
+  "final_decision": "A 1-2 sentence final tactical decision.",
+  "summary_action": "A very short, 1-line phrase summarizing the primary action and reason (e.g., 'Structural inspection + clearance (due to high collapse risk)')"
 }
 Only output the JSON object, do not include markdown formatting like \`\`\`json.
 `;
