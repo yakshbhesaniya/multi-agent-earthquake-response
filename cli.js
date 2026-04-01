@@ -32,14 +32,14 @@ async function runCLI() {
             orchestration: "Coordinator assigned tasks to Infrastructure and Transportation agents",
             infrastructure: {
                 risk_level: result.infrastructureAgentDetails.risk_level || "N/A",
-                confidence: result.infrastructureAgentDetails.confidence || "N/A",
+                confidence: `${result.infrastructureAgentDetails.confidence || "N/A"} (based on available data and domain assumptions)`,
                 critical_zones: result.infrastructureAgentDetails.critical_zones || [],
                 reasoning: result.infrastructureAgentDetails.reasoning || "N/A",
                 final_output: result.infrastructureAgentDetails.final_output || "N/A"
             },
             transportation: {
                 risk_level: result.transportationAgentDetails.risk_level || "N/A",
-                confidence: result.transportationAgentDetails.confidence || "N/A",
+                confidence: `${result.transportationAgentDetails.confidence || "N/A"} (based on available data and domain assumptions)`,
                 blocked_routes: result.transportationAgentDetails.blocked_routes || [],
                 alternate_routes: result.transportationAgentDetails.alternate_routes || [],
                 reasoning: result.transportationAgentDetails.reasoning || "N/A",
@@ -47,7 +47,7 @@ async function runCLI() {
             },
             coordinator_decision: {
                 priority: result.coordinatorDecision.priority || "N/A",
-                confidence: result.coordinatorDecision.confidence || "N/A",
+                confidence: `${result.coordinatorDecision.confidence || "N/A"} (based on available data and domain assumptions)`,
                 recommended_actions: result.coordinatorDecision.recommended_actions || [],
                 reasoning: result.coordinatorDecision.reasoning || "N/A",
                 final_decision: result.coordinatorDecision.final_decision || "N/A"
@@ -56,7 +56,7 @@ async function runCLI() {
 
         const formatAgent = (name, data) => {
             const riskOrPriority = data.risk_level || data.priority || "N/A";
-            let out = `${name}:\n- Reasoning: ${data.reasoning || "N/A"}\n- Risk Level: ${riskOrPriority}\n- Confidence: ${data.confidence || "N/A"}\n- Final Output: ${data.final_output || data.final_decision || "N/A"}`;
+            let out = `${name}:\n- Reasoning: ${data.reasoning || "N/A"}\n- Risk Level: ${riskOrPriority}\n- Confidence: ${data.confidence || "N/A"} (based on available data and domain assumptions)\n- Final Output: ${data.final_output || data.final_decision || "N/A"}`;
             
             if (name === "Infrastructure Agent") {
                 out += `\n- Critical Zones: ${(data.critical_zones || []).join(", ") || "None specified"}`;

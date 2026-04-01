@@ -46,7 +46,7 @@ ${JSON.stringify(transportResponse)}
 Based on these reports, provide a final strategic decision.
 Respond strictly with a valid JSON document containing these exact keys:
 {
-  "reasoning": "Brief orchestration rationale based on sub-agents",
+  "reasoning": "Concise technical rationale based on sub-agents' data (max 2 sentences, engineered tone)",
   "priority": "Low/Medium/High/Critical",
   "confidence": "Percentage (e.g., 90%)",
   "recommended_actions": ["Action1", "Action2"],
