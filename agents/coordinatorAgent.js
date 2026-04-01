@@ -25,14 +25,14 @@ export async function runCoordinator(earthquakeData) {
 
     // Step 2: Combine responses and use general domain knowledge for final decision
     console.log(`[Coordinator] Received sub-agent reports. Formulating final decision...`);
-    const generalKnowledge = getDomainKnowledge('general');
+    const domainKnowledge = getDomainKnowledge('general') + ' ' + getDomainKnowledge('response') + ' ' + getDomainKnowledge('uncertainty');
 
     const prompt = `
 You are the Coordinator Agent for an Earthquake Response System.
 An earthquake of magnitude ${earthquakeData.magnitude} has struck ${earthquakeData.location}.
 
 General knowledge:
-"${generalKnowledge}"
+"${domainKnowledge}"
 
 Here are the reports from your specialized sub-agents:
 --- INFRASTRUCTURE REPORT ---

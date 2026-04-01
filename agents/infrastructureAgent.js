@@ -7,16 +7,17 @@ import { getDomainKnowledge } from '../services/knowledgeBase.js';
  * @returns {Promise<string>} Agent's reasoning and result
  */
 export async function analyzeInfrastructure(earthquakeData) {
-    const domainKnowledge = getDomainKnowledge('infrastructure');
+    // Fetch background domain knowledge for the infrastructure and magnitude arrays
+    const domainKnowledge = getDomainKnowledge('infrastructure') + ' ' + getDomainKnowledge('magnitude') + ' ' + getDomainKnowledge('uncertainty');
     
     const prompt = `
-You are the Infrastructure Agent responding to an earthquake scenario.
-Analyze the expected structural and building damage risk based on the following data:
-- Magnitude: ${earthquakeData.magnitude}
-- Location: ${earthquakeData.location}
+You are the Infrastructure Assessment Agent for Mumbai's Disaster Response System.
+Your job is to analyze the structural risk based on the earthquake data and domain knowledge.
 
-Here is some domain knowledge you should use:
-"${domainKnowledge}"
+MANDATORY RULE: If the earthquake magnitude is 6.5 or above, you MUST classify the risk_level as "High" or "Critical".
+
+Earthquake Data: Magnitude ${earthquakeData.magnitude} at ${earthquakeData.location}
+Domain Knowledge: ${domainKnowledge}
 
 Respond strictly with a valid JSON document containing these exact keys:
 {
