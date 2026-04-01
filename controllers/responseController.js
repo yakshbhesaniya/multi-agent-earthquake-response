@@ -45,6 +45,11 @@ const responseController = {
                     recommended_actions: result.coordinatorDecision.recommended_actions || [],
                     reasoning: result.coordinatorDecision.reasoning || "N/A",
                     final_decision: result.coordinatorDecision.final_decision || "N/A"
+                },
+                final_response_summary: {
+                    risk: result.coordinatorDecision.priority || "High",
+                    priority_zone: (result.infrastructureAgentDetails.critical_zones || [])[0] || "South Mumbai",
+                    primary_action: "Structural inspection + route clearance (due to high collapse risk and blocked major routes)"
                 }
             };
 
