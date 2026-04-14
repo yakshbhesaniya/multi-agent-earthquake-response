@@ -1,13 +1,7 @@
 import { queryLLM } from '../services/llmService.js';
 import { getDomainKnowledge } from '../services/knowledgeBase.js';
 
-/**
- * The Transportation Agent suggests evacuation routes and evaluates road blockage risks.
- * @param {Object} earthquakeData Earthquake details like magnitude and location
- * @returns {Promise<string>} Agent's reasoning and result
- */
 export async function analyzeTransportation(earthquakeData) {
-    // Fetch background domain knowledge for transportation and magnitude context
     const domainKnowledge = getDomainKnowledge('transportation') + ' ' + getDomainKnowledge('magnitude') + ' ' + getDomainKnowledge('uncertainty');
     
     const prompt = `

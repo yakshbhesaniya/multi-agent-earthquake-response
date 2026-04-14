@@ -3,27 +3,21 @@ import { getDomainKnowledge } from '../services/knowledgeBase.js';
 import { analyzeInfrastructure } from './infrastructureAgent.js';
 import { analyzeTransportation } from './transportationAgent.js';
 
-/**
- * The Coordinator Agent orchestrates the response by taking inputs,
- * calling other agents, and generating a final decision based on their reports.
- * @param {Object} earthquakeData Earthquake details
- * @returns {Promise<Object>} Object containing all agent responses and final decision
- */
 export async function runCoordinator(earthquakeData) {
     console.log(`[Coordinator] Received earthquake data: Magnitude ${earthquakeData.magnitude} at ${earthquakeData.location}`);
     
-    // Step 1: Trigger sub-agents sequentially with delays to respect API quotas
+    // Trigger sub-agents 
     console.log(`[Coordinator] Assigned task to Infrastructure agent...`);
     const infraResponse = await analyzeInfrastructure(earthquakeData);
     
-    await delay(1200); // Wait 1.2s to slow request velocity
+    await delay(1200); 
 
     console.log(`[Coordinator] Assigned task to Transportation agent...`);
     const transportResponse = await analyzeTransportation(earthquakeData);
 
-    await delay(1200); // Additional wait before final coordinator call
+    await delay(1200); 
 
-    // Step 2: Combine responses and use general domain knowledge for final decision
+    // Combine responses 
     console.log(`[Coordinator] Received sub-agent reports. Formulating final decision...`);
     const domainKnowledge = getDomainKnowledge('general') + ' ' + getDomainKnowledge('response') + ' ' + getDomainKnowledge('uncertainty');
 
@@ -67,7 +61,6 @@ Only output the JSON object, do not include markdown formatting like \`\`\`json.
         finalDecision = { error: e.message || "Failed to parse JSON", raw: responseText };
     }
 
-    // Return the structured output as requested
     return {
         event: `Earthquake detected: Magnitude ${earthquakeData.magnitude} at ${earthquakeData.location}`,
         infrastructureAgentDetails: infraResponse,

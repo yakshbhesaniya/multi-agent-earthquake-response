@@ -1,7 +1,3 @@
-/**
- * A static predefined knowledge base used to augment agent prompts 
- * and simulate simple RAG (Retrieval-Augmented Generation).
- */
 export const knowledgeBase = {
     general: [
         "Earthquakes are caused by sudden release of energy in the Earth's crust, leading to ground shaking and structural damage.",

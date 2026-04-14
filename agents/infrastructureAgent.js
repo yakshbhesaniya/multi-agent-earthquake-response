@@ -1,13 +1,7 @@
 import { queryLLM } from '../services/llmService.js';
 import { getDomainKnowledge } from '../services/knowledgeBase.js';
 
-/**
- * The Infrastructure Agent analyzes building and structural damage risk based on earthquake data.
- * @param {Object} earthquakeData Earthquake details like magnitude and location
- * @returns {Promise<string>} Agent's reasoning and result
- */
 export async function analyzeInfrastructure(earthquakeData) {
-    // Fetch background domain knowledge for the infrastructure and magnitude arrays
     const domainKnowledge = getDomainKnowledge('infrastructure') + ' ' + getDomainKnowledge('magnitude') + ' ' + getDomainKnowledge('uncertainty');
     
     const prompt = `

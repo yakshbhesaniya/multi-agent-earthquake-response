@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// Main API endpoint for processing earthquake scenarios
+// API endpoint for processing earthquake scenarios
 app.post('/api/analyze', responseController.analyzeEarthquake);
 
 const PORT = process.env.PORT || 3000;

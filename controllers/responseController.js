@@ -1,9 +1,6 @@
 import { runCoordinator } from '../agents/coordinatorAgent.js';
 
 const responseController = {
-    /**
-     * API Endpoint Handler to analyze earthquake scenarios
-     */
     async analyzeEarthquake(req, res) {
         try {
             const { magnitude, location } = req.body;
@@ -17,10 +14,9 @@ const responseController = {
             console.log(`\n--- New Request ---`);
             console.log(`Input: Magnitude ${magnitude}, Location: ${location}`);
 
-            // Invoke the Coordinator Agent (Main controller)
+            // Invoke the Coordinator Agent
             const result = await runCoordinator({ magnitude, location });
 
-            // Structure response strictly as JSON requested by the user
             const finalJSON = {
                 event: result.event,
                 orchestration: "Coordinator assigned tasks to Infrastructure and Transportation agents",
@@ -89,7 +85,6 @@ Primary Action: ${result.coordinatorDecision.summary_action || "Structural inspe
 
             console.log(`\n${terminalOutput}\n`);
 
-            // Return strict JSON structure
             return res.status(200).json(finalJSON);
 
         } catch (error) {
